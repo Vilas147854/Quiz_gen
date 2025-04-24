@@ -23,7 +23,7 @@ def generate_quiz():
     prompt = f"""
     Generate {num_questions} multiple-choice question(s) on {topic} for SSC CGL preparation with {difficulty} difficulty level.
     Each question should have 4 options and one correct answer.
-    Ensure the questions are similar to previous year SSC CGL papers in style and difficulty.
+    Ensure the questions cover all the various categories in the SSC CGL Syllabus and are similar to previous year SSC CGL papers in style and difficulty.
     Return the response in JSON format as an array of objects, each with fields: question, options, correct_answer.
     Example:
     [
