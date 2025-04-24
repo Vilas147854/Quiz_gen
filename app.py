@@ -19,18 +19,19 @@ def generate_quiz():
     num_questions = int(request.form.get("num_questions", 1))
     difficulty = request.form.get("difficulty", "medium")
     
-    # Call Gemini API to generate questions
+    # Prompt updated to include explanations
     prompt = f"""
     Generate {num_questions} multiple-choice question(s) on {topic} for SSC CGL preparation with {difficulty} difficulty level.
-    Each question should have 4 options and one correct answer.
-    Ensure the questions cover all the various categories in the SSC CGL Syllabus and are similar to previous year SSC CGL papers in style and difficulty.
-    Return the response in JSON format as an array of objects, each with fields: question, options, correct_answer.
+    Each question should have 4 options, one correct answer, and a short explanation for the correct answer.
+    Ensure the questions cover all the different types of question in the SSC CGL syllabus and are similar to previous year SSC CGL papers in style and difficulty.
+    Return the response in JSON format as an array of objects, each with fields: question, options, correct_answer, explanation.
     Example:
     [
         {{
             "question": "What is 2 + 2?",
             "options": ["3", "4", "5", "6"],
-            "correct_answer": "4"
+            "correct_answer": "4",
+            "explanation": "The sum of 2 and 2 is 4."
         }}
     ]
     """
@@ -67,6 +68,7 @@ def submit():
     for q in quiz:
         question_text = q["question"]
         correct_answer = q["correct_answer"]
+        explanation = q["explanation"]  # New field for explanation
         user_answer = user_answers.get(question_text, None)
         is_correct = user_answer == correct_answer
         if is_correct:
@@ -75,7 +77,8 @@ def submit():
             "question": question_text,
             "user_answer": user_answer,
             "correct_answer": correct_answer,
-            "is_correct": is_correct
+            "is_correct": is_correct,
+            "explanation": explanation  # Include explanation in results
         })
     
     # Clear the quiz from the session

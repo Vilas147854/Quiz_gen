@@ -13,6 +13,7 @@
             <th>Your Answer</th>
             <th>Correct Answer</th>
             <th>Status</th>
+            <th>Explanation</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
             <td>{{ result.user_answer or 'No answer' }}</td>
             <td>{{ result.correct_answer }}</td>
             <td>{% if result.is_correct %}<span class="text-success">Correct</span>{% else %}<span class="text-danger">Incorrect</span>{% endif %}</td>
+            <td>{{ result.explanation }}</td>
         </tr>
         {% endfor %}
     </tbody>
