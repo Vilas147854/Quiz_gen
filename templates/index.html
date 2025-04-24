@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>SSC CGL Quiz Generator</h1>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form action="/generate-quiz" method="post">
+    <div class="mb-3">
+        <label for="topic" class="form-label">Topic (e.g., quantitative aptitude):</label>
+        <input type="text" class="form-control" id="topic" name="topic" required>
+    </div>
+    <div class="mb-3">
+        <label for="num_questions" class="form-label">Number of Questions:</label>
+        <input type="number" class="form-control" id="num_questions" name="num_questions" value="1" min="1" max="10">
+    </div>
+    <div class="mb-3">
+        <label for="difficulty" class="form-label">Difficulty Level:</label>
+        <select class="form-select" id="difficulty" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate Quiz</button>
+</form>
+{% endblock %}

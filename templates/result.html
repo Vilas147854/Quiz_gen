@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Result{% endblock %}
+
+{% block content %}
+<h1>Quiz Result</h1>
+<p>Your score: {{ score }} / {{ total }}</p>
+<h2>Detailed Results</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.question }}</td>
+            <td>{{ result.user_answer or 'No answer' }}</td>
+            <td>{{ result.correct_answer }}</td>
+            <td>{% if result.is_correct %}<span class="text-success">Correct</span>{% else %}<span class="text-danger">Incorrect</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary">Take another quiz</a>
+{% endblock %}
